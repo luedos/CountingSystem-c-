@@ -1,0 +1,24 @@
+﻿  CountingSystem.cpp
+c:\users\vlol\source\repos\countingsystem\countingsystem\src\countingsystem.cpp(74): warning C4018: '<': signed/unsigned mismatch
+c:\users\vlol\source\repos\countingsystem\countingsystem\src\countingsystem.cpp(78): warning C4018: '<': signed/unsigned mismatch
+c:\users\vlol\source\repos\countingsystem\countingsystem\src\countingsystem.cpp(108): warning C4018: '<': signed/unsigned mismatch
+c:\users\vlol\source\repos\countingsystem\countingsystem\src\countingsystem.cpp(141): warning C4018: '<': signed/unsigned mismatch
+c:\users\vlol\source\repos\countingsystem\countingsystem\src\countingsystem.cpp(183): warning C4018: '>=': signed/unsigned mismatch
+c:\users\vlol\source\repos\countingsystem\countingsystem\src\countingsystem.cpp(186): warning C4018: '<': signed/unsigned mismatch
+c:\users\vlol\source\repos\countingsystem\countingsystem\src\countingsystem.cpp(218): warning C4018: '<': signed/unsigned mismatch
+c:\users\vlol\source\repos\countingsystem\countingsystem\src\countingsystem.cpp(249): warning C4018: '<': signed/unsigned mismatch
+c:\users\vlol\source\repos\countingsystem\countingsystem\src\countingsystem.cpp(270): warning C4018: '<': signed/unsigned mismatch
+c:\users\vlol\source\repos\countingsystem\countingsystem\src\countingsystem.cpp(278): warning C4018: '<': signed/unsigned mismatch
+c:\users\vlol\source\repos\countingsystem\countingsystem\src\countingsystem.cpp(332): warning C4018: '<': signed/unsigned mismatch
+c:\users\vlol\source\repos\countingsystem\countingsystem\src\countingsystem.cpp(336): warning C4018: '<': signed/unsigned mismatch
+c:\users\vlol\source\repos\countingsystem\countingsystem\src\countingsystem.cpp(378): warning C4018: '<': signed/unsigned mismatch
+c:\users\vlol\source\repos\countingsystem\countingsystem\src\countingsystem.cpp(382): warning C4018: '<': signed/unsigned mismatch
+c:\users\vlol\source\repos\countingsystem\countingsystem\src\countingsystem.cpp(401): warning C4018: '<': signed/unsigned mismatch
+c:\users\vlol\source\repos\countingsystem\countingsystem\src\countingsystem.cpp(409): warning C4018: '<': signed/unsigned mismatch
+c:\users\vlol\source\repos\countingsystem\countingsystem\src\countingsystem.cpp(428): warning C4018: '<': signed/unsigned mismatch
+c:\users\vlol\source\repos\countingsystem\countingsystem\src\countingsystem.cpp(450): warning C4018: '<': signed/unsigned mismatch
+c:\users\vlol\source\repos\countingsystem\countingsystem\src\countingsystem.cpp(459): warning C4018: '<': signed/unsigned mismatch
+c:\users\vlol\source\repos\countingsystem\countingsystem\src\countingsystem.cpp(540): warning C4018: '<': signed/unsigned mismatch
+c:\users\vlol\source\repos\countingsystem\countingsystem\src\countingsystem.cpp(649): warning C4018: '<': signed/unsigned mismatch
+c:\users\vlol\source\repos\countingsystem\countingsystem\src\countingsystem.cpp(737): warning C4018: '<': signed/unsigned mismatch
+  CountingSystem.vcxproj -> C:\Users\vlol\source\repos\CountingSystem\CountingSystem\bin\Win32\Debug\CountingSystem.lib
