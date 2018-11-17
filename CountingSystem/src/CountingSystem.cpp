@@ -1,5 +1,6 @@
 #include "includes/CountingSystem.h"
 
+using namespace bwn;
 
 std::string CountingSystem::ToString() const
 {
@@ -43,7 +44,6 @@ CountingSystem::CountingSystem(unsigned int inOrder)
 	else
 		order = inOrder;
 
-	myValue.resize(1);
 }
 
 CountingSystem::CountingSystem(unsigned int inOrder, int inTenCS)
@@ -69,7 +69,7 @@ void CountingSystem::operator=(const CountingSystem& inCS)
 	myValue = inCS.myValue;
 }
 
-void CountingSystem::NormalizeSelf()
+void CountingSystem::Normalize()
 {
 	for (int i = 0; i < myValue.size(); ++i)
 	{
@@ -166,12 +166,7 @@ void CountingSystem::NormalizeSelf()
 			break;
 }
 
-void CountingSystem::Normalize(CountingSystem& inCS)
-{
-	inCS.NormalizeSelf();
-}
-
-void CountingSystem::ValueShiftSelf(unsigned int inShift)
+void CountingSystem::ValueShift(unsigned int inShift)
 {
 	if (inShift == 0)
 		return;
@@ -187,13 +182,6 @@ void CountingSystem::ValueShiftSelf(unsigned int inShift)
 		myValue[i] = 0;
 
 }
-
-void CountingSystem::ValueShift(unsigned int inShift, CountingSystem& inCS)
-{
-	inCS.ValueShiftSelf(inShift);
-}
-
-
 
 CountingSystem CountingSystem::GetNewOrder(unsigned int inOrder)
 {
@@ -232,8 +220,6 @@ void CountingSystem::ChangeOrder(unsigned int inOrder)
 	order = inOrder;
 }
 
-
-
 CountingSystem CountingSystem::operator+ (const CountingSystem& inCS)
 {
 	CountingSystem ret(inCS);
@@ -251,7 +237,7 @@ CountingSystem CountingSystem::operator+ (const CountingSystem& inCS)
 		ret.myValue[i] += myValue[i];
 	}
 
-	ret.NormalizeSelf();
+	ret.Normalize();
 
 	return ret;
 }
@@ -279,7 +265,7 @@ void CountingSystem::operator+=(const CountingSystem& inCS)
 			myValue[i] += inCS.myValue[i];
 	}
 
-	NormalizeSelf();
+	Normalize();
 
 }
 
@@ -301,7 +287,7 @@ void CountingSystem::operator+=(int inInt)
 		myValue[0] += inInt;
 	}
 
-	NormalizeSelf();
+	Normalize();
 }
 
 CountingSystem CountingSystem::operator* (const CountingSystem& inCS)
@@ -336,9 +322,9 @@ CountingSystem CountingSystem::operator* (const CountingSystem& inCS)
 		for (int ii = 0; ii < localCS.myValue.size(); ++ii)
 			localCS.myValue[ii] *= inSecond->myValue[i];
 
-		localCS.NormalizeSelf();
+		localCS.Normalize();
 
-		localCS.ValueShiftSelf(i);
+		localCS.ValueShift(i);
 
 		retCS += localCS;
 	}
@@ -382,9 +368,9 @@ void CountingSystem::operator*=(const CountingSystem& inCS)
 		for (int ii = 0; ii < localCS.myValue.size(); ++ii)
 			localCS.myValue[ii] *= inSecond->myValue[i];
 
-		localCS.NormalizeSelf();
+		localCS.Normalize();
 
-		localCS.ValueShiftSelf(i);
+		localCS.ValueShift(i);
 
 		retCS += localCS;
 	}
@@ -409,7 +395,7 @@ void CountingSystem::operator*=(int inInt)
 		for (int i = 0; i < myValue.size(); ++i)
 			myValue[i] *= inInt;
 
-		NormalizeSelf();
+		Normalize();
 	}
 }
 
@@ -431,7 +417,7 @@ CountingSystem CountingSystem::operator- (const CountingSystem& inCS)
 		ret.myValue[i] += myValue[i];
 	}
 
-	ret.NormalizeSelf();
+	ret.Normalize();
 
 	return ret;
 }
@@ -460,7 +446,7 @@ void CountingSystem::operator-=(const CountingSystem& inCS)
 			myValue[i] -= inCS.myValue[i];
 	}
 
-	NormalizeSelf();
+	Normalize();
 }
 
 void CountingSystem::operator-=(int inInt)
@@ -481,7 +467,7 @@ void CountingSystem::operator-=(int inInt)
 		myValue[0] -= inInt;
 	}
 
-	NormalizeSelf();
+	Normalize();
 }
 
 CountingSystem CountingSystem::operator/ (const CountingSystem& inCS)
@@ -586,7 +572,7 @@ CountingSystem CountingSystem::operator/ (const CountingSystem& inCS)
 
 	std::reverse(retCS.myValue.begin(), retCS.myValue.end());
 
-	retCS.NormalizeSelf();
+	retCS.Normalize();
 
 	if (TestBool)
 		delete inSecond;
@@ -695,7 +681,7 @@ void CountingSystem::operator/=(const CountingSystem& inCS)
 
 	std::reverse(retCS.myValue.begin(), retCS.myValue.end());
 
-	retCS.NormalizeSelf();
+	retCS.Normalize();
 
 	if (TestBool)
 		delete inSecond;
@@ -783,7 +769,7 @@ void CountingSystem::operator/=(int inInt)
 
 	std::reverse(retCS.myValue.begin(), retCS.myValue.end());
 
-	retCS.NormalizeSelf();
+	retCS.Normalize();
 	
 	myValue = retCS.myValue;
 }
@@ -894,106 +880,12 @@ bool CountingSystem::operator<(const CountingSystem& inCS)
 
 bool CountingSystem::operator>=(const CountingSystem& inCS)
 {
-	if (order != inCS.order)
-	{
-		CountingSystem localCS(inCS);
-
-		localCS.ChangeOrder(order);
-
-		if (myValue.size() > localCS.myValue.size())
-			return myValue.back() > 0;
-
-		if (myValue.size() < localCS.myValue.size())
-			return myValue.back() < 0;
-
-		for (int i = myValue.size() - 1; i >= 0; --i)
-		{
-			if (myValue[i] == localCS.myValue[i])
-				continue;
-
-			if (myValue[i] > localCS.myValue[i])
-				return true;
-
-			if (myValue[i] < localCS.myValue[i])
-				return false;
-		}
-
-
-	}
-	else
-	{
-		if (myValue.size() > inCS.myValue.size())
-			return myValue.back() > 0;
-
-		if (myValue.size() < inCS.myValue.size())
-			return myValue.back() < 0;
-
-		for (int i = myValue.size() - 1; i >= 0; --i)
-		{
-			if (myValue[i] == inCS.myValue[i])
-				continue;
-
-			if (myValue[i] > inCS.myValue[i])
-				return true;
-
-			if (myValue[i] < inCS.myValue[i])
-				return false;
-		}
-	}
-
-	return true;
+	return !(*this < inCS);
 }
 
 bool CountingSystem::operator<=(const CountingSystem& inCS)
 {
-	if (order != inCS.order)
-	{
-		CountingSystem localCS(inCS);
-
-		localCS.ChangeOrder(order);
-
-		if (myValue.size() > localCS.myValue.size())
-			return myValue.back() < 0;
-
-		if (myValue.size() < localCS.myValue.size())
-			return myValue.back() > 0;
-
-		for (int i = myValue.size() - 1; i >= 0; --i)
-		{
-			if (myValue[i] == localCS.myValue[i])
-				continue;
-
-			if (myValue[i] > localCS.myValue[i])
-				return false;
-
-			if (myValue[i] < localCS.myValue[i])
-				return true;
-		}
-
-
-	}
-	else
-	{
-		if (myValue.size() > inCS.myValue.size())
-			return myValue.back() < 0;
-
-		if (myValue.size() < inCS.myValue.size())
-			return myValue.back() > 0;
-
-		for (int i = myValue.size() - 1; i >= 0; --i)
-		{
-			if (myValue[i] == inCS.myValue[i])
-				continue;
-
-			if (myValue[i] > inCS.myValue[i])
-				return false;
-
-			if (myValue[i] < inCS.myValue[i])
-				return true;
-		}
-	}
-
-	return true;
+	return !(*this > inCS);
 }
 
 bool CountingSystem::operator==(const CountingSystem& inCS)
@@ -1033,37 +925,7 @@ bool CountingSystem::operator==(const CountingSystem& inCS)
 
 bool CountingSystem::operator!=(const CountingSystem& inCS)
 {
-	if (order != inCS.order)
-	{
-		CountingSystem localCS(inCS);
-
-		localCS.ChangeOrder(order);
-
-		if (myValue.size() != localCS.myValue.size())
-			return true;
-
-		for (int i = myValue.size() - 1; i >= 0; --i)
-		{
-			if (myValue[i] != localCS.myValue[i])
-				true;
-
-		}
-
-
-	}
-	else
-	{
-		if (myValue.size() != inCS.myValue.size())
-			return true;
-
-		for (int i = myValue.size() - 1; i >= 0; --i)
-		{
-			if (myValue[i] != inCS.myValue[i])
-				true;
-		}
-	}
-
-	return false;
+	return !(*this == inCS);
 }
 
 void CountingSystem::BreakZeroEnd()

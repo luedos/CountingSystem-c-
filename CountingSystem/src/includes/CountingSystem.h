@@ -4,80 +4,79 @@
 
 
 //template<int order>
-class CountingSystem
+namespace bwn
 {
-	std::vector<int> myValue;
-	
-	int order;
 
-public:
-	std::string ToString() const;
-	
-	int GetOrder() const { return order; } 
+	class CountingSystem
+	{
+		std::vector<int> myValue;
 
-	CountingSystem(unsigned int inOrder);
-	
-	CountingSystem(unsigned int inOrder, int inTenCS);
+		int order;
 
-	CountingSystem(const CountingSystem& inCS);
-	
-	void operator=(const CountingSystem& inCS);
+	public:
+		std::string ToString() const;
 
-	CountingSystem GetNewOrder(unsigned int inOrder);
+		int GetOrder() const { return order; }
 
-	void ChangeOrder(unsigned int inOrder);
+		CountingSystem(unsigned int inOrder);
 
-	void NormalizeSelf();
+		CountingSystem(unsigned int inOrder, int inTenCS);
 
-	static void Normalize(CountingSystem& inCS);
+		CountingSystem(const CountingSystem& inCS);
 
-	int operator[] (int inIndex) const { return myValue[inIndex]; }
+		void operator=(const CountingSystem& inCS);
 
-	int GetSize() const;
+		CountingSystem GetNewOrder(unsigned int inOrder);
 
-	CountingSystem operator+ (const CountingSystem& inCS);
+		void ChangeOrder(unsigned int inOrder);
 
-	void operator+=(const CountingSystem& inCS);
+		void Normalize();
 
-	void operator+=(int inInt);
+		int operator[] (int inIndex) const { return myValue[inIndex]; }
 
-	CountingSystem operator* (const CountingSystem& inCS);
+		int GetSize() const;
 
-	void operator*=(const CountingSystem& inCS);
+		CountingSystem operator+ (const CountingSystem& inCS);
 
-	void operator*=(int inInt);
+		void operator+=(const CountingSystem& inCS);
 
-	CountingSystem operator- (const CountingSystem& inCS);
+		void operator+=(int inInt);
 
-	void operator-=(const CountingSystem& inCS);
+		CountingSystem operator* (const CountingSystem& inCS);
 
-	void operator-=(int inInt);
+		void operator*=(const CountingSystem& inCS);
 
-	CountingSystem operator/ (const CountingSystem& inCS);
+		void operator*=(int inInt);
 
-	void operator/=(const CountingSystem& inCS);
+		CountingSystem operator- (const CountingSystem& inCS);
 
-	void operator/=(int inInt);
+		void operator-=(const CountingSystem& inCS);
 
-	bool operator>(const CountingSystem& inCSFirst);
+		void operator-=(int inInt);
 
-	bool operator<(const CountingSystem& inCSFirst);
+		CountingSystem operator/ (const CountingSystem& inCS);
 
-	bool operator>=(const CountingSystem& inCSFirst);
+		void operator/=(const CountingSystem& inCS);
 
-	bool operator<=(const CountingSystem& inCSFirst);
+		void operator/=(int inInt);
 
-	bool operator==(const CountingSystem& inCSFirst);
+		bool operator>(const CountingSystem& inCSFirst);
 
-	bool operator!=(const CountingSystem& inCSFirst);
+		bool operator<(const CountingSystem& inCSFirst);
 
-	friend int main();
+		bool operator>=(const CountingSystem& inCSFirst);
 
-private:
+		bool operator<=(const CountingSystem& inCSFirst);
 
-	void ValueShiftSelf(unsigned int inShift);
+		bool operator==(const CountingSystem& inCSFirst);
 
-	static void ValueShift(unsigned int inShift, CountingSystem& inCS);
+		bool operator!=(const CountingSystem& inCSFirst);
 
-	void BreakZeroEnd();
-};
+	private:
+
+		void ValueShift(unsigned int inShift);
+
+		void BreakZeroEnd();
+	};
+
+}
